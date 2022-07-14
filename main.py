@@ -30,9 +30,9 @@ def randomQuestions (): #randomises questions
       randomQuestions()
      
 
-class Mainpage:
+class Mainpage:#start page
   def __init__(self, parent):
-    background_color="lightgrey"
+    background_color="lightgrey"#background color
 
     self.heading_label=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg=background_color)
     self.heading_label.place(x=100, y=20)#Heading of the quiz
@@ -41,9 +41,11 @@ class Mainpage:
 
     self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg=background_color)
     self.user_label.place(x=650, y=270)#name heading
+    
 
     self.entry_box=Entry(window)
     self.entry_box.place(x=800, y=320)#entry box
+    
 
     self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_storage)
     self.start_button.place(x=100, y=500)#start button
@@ -55,39 +57,42 @@ class Mainpage:
         self.user_label.destroy()
         self.entry_box.destroy()
         self.start_button.destroy()
-        Quiz(window)
+        Quizpage(window)
 
-class Quiz:
+class Quizpage:#Quiz page
 
   def __init__(self, parent):
-    background_color="white"
+    background_color="white"#background color
  
  
     self.quiz_frame = Frame(parent, bg = background_color, padx=40, pady=40)
-    self.quiz_frame.grid()
+    self.quiz_frame.grid() #frame of quiz page
 
-    randomQuestions()
+    randomQuestions() #question randomiser
 
-    self.question_label=Label(window, text = questions_answers[qnum][0], font =( "Tw Cen MT","18","bold"))
+    self.question_label=Label(window, text = questions_answers[qnum][0], font =( "Tw Cen MT","18","bold")) #questions
     self.question_label.grid(row= 0, padx=10, pady=10)  
 
     self.var1=IntVar()
 
     self.options1 = Radiobutton(window, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
-    self.options1.grid(row=1, sticky=W)
+    self.options1.grid(row=1, sticky=W)#option 1
 
     self.options2 = Radiobutton(window, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.var1, pady=10)
-    self.options2.grid(row=2, sticky=W)
+    self.options2.grid(row=2, sticky=W)#option 2
 
     self.options3 = Radiobutton(window, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.var1, pady=10)
-    self.options3.grid(row=3, sticky=W)
+    self.options3.grid(row=3, sticky=W)#option 3
 
     self.options4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.var1, pady=10)
-    self.options4.grid(row=4, sticky=W)
+    self.options4.grid(row=4, sticky=W)#option 4
 
     self.confirm_button = Button(window, text="Confrim",bg="white",command=self.test_progress)
-    self.confirm_button.grid(row=6)
+    self.confirm_button.grid(row=6)#confirm button which takes you to the next page 
     
+    self.leave = Button(window, text='Leave', font=('Helvetica', '13', 'bold'), bg='red', command=self.end_screen) #leave button which takes you to the exit page 
+
+    self.leave.place(x=0, y=250)  
     
     self.score_label  = Label(window, text ='score')
     self.score_label.grid(row= 7)  
@@ -105,7 +110,7 @@ class Quiz:
  
   def test_progress(self):
       global score
-      #score = 0
+      
       scr_label=self.score_label
       choice=self.var1.get()
       if len(asked)>9:
@@ -136,6 +141,45 @@ class Quiz:
                   self.questions_setup()
 
 
+  def end_screen(self):
+    window.destroy()
+    name = names[0]
+    open_end_object = end()
+
+
+
+class end:
+
+
+  def __init__(self):
+      background_color = 'lightgreen'
+      global window2
+      window2 = Tk()
+      window2.title('Exit Box')
+      window2.geometry('700x600')
+      self.end_frame = Frame(window2, width=700, height=600,bg=background_color)
+      self.end_frame.grid(row=1)
+      self.end_heading = Label(window2,text='Thank You For Trying Out The Quiz ', font=('Tw Cen Mt', 22, 'bold'), bg=background_color)
+      self.end_heading.place(x=80, y=50) 
+      self.exit_button = Button( 
+          window2, 
+          text='Exit',  
+          width=10,  
+          bg='lightblue', 
+          font=('Tw Cen Mt', 12, 'bold'),  
+          command=self.close_end,  
+          ) 
+      self.exit_button.place(x=260, y=200) 
+      self.list_label = Label(window2, text='Do not hesitate to try again..', font=('Tw Cen Mt', 12, 'bold'), width=40, bg=background_color)
+      self.list_label.place(x=110, y=100)
+  
+  
+  def close_end(self):
+      self.end_frame.destroy()
+      self.end_heading.destroy()
+      self.exit_button.destroy()
+      self.list_label.destroy()
+      window2.destroy()
   
   
   
