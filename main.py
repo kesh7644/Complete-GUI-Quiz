@@ -70,7 +70,7 @@ class Mainpage:#start page
             self.user_label.destroy() #destroys the uder label
             self.entry_box.destroy() #destroys the entry box
             self.start_button.destroy() #destroys the start button
-            Quizpage(window)
+            Quizpage(window) # now we open the quiz questions page
 
 class Quizpage:#Quiz page
 
@@ -105,7 +105,7 @@ class Quizpage:#Quiz page
     self.score_label = Label(window, text ='score')
     self.score_label.place(x=407, y=300)  
     
-    self.leave = Button(window, text='Leave', font=('Helvetica', '13', 'bold'), bg='red', command=self.end_screen) #leave button which takes you to the exit page 
+    self.leave = Button(window, text='Leave', font=('Helvetica', '13', 'bold'), bg='red', command=self.result_screen) #leave button which takes you to the exit page 
 
     self.leave.place(x=0, y=300)  
     
@@ -131,31 +131,31 @@ class Quizpage:#Quiz page
           score +=1 # adds one point to score
           scr_label.configure(text=score)  # will change label to new score when score is gained 
           self.confirm_button.config(text="Confirm") # will change the text on the button to confirm
-          self.end_screen() # to open end screen (end box) when quiz is done
+          self.result_screen() # to open end screen (end box) when quiz is done
         else:
-          score+=0
-          scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] )
-          self.confirm_button.config(text="confirm")
+          score+=0 # score will stay the same
+          scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] ) # this is to give the right answer instead of their score
+          self.confirm_button.config(text="confirm") # button
      
       else:
-            if choice==0:
-              self.confirm_button.config(text="Try Again, you didn't select an option then submit again" )
-              choice=self.var1.get()
+            if choice==0:  # if user does not select an option
+              self.confirm_button.config(text="Try Again, you didn't select an option then submit again" ) # error message
+              choice=self.var1.get() # still get the answer if they choose it
             else:
-              if choice == questions_answers[qnum][6]:
-                score+=1
+              if choice == questions_answers[qnum][6]:  # if the choice made is correct
+                score+=1  # add +1 to score
                 scr_label.configure(text=score)
                 self.confirm_button.config(text="confirm")
-                self.questions_setup()
+                self.questions_setup() # move to the next question:
       
-              else:
-                  score+=0
-                  scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5])
+              else: # if choice was not the correct answer
+                  score+=0 # score will stay the same
+                  scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5]) # error message
                   self.confirm_button.config(text="Confirmn")
-                  self.questions_setup()
+                  self.questions_setup() # move to the next question:
 
 
-  def end_screen(self):
+  def result_screen(self): # method to end screen
     window.destroy()
     name = names[0]
     open_end_object = end()
@@ -190,11 +190,11 @@ class end:
   
   
   def close_end(self):
-      self.end_frame.destroy()
-      self.end_heading.destroy()
-      self.exit_button.destroy()
-      self.list_label.destroy()
-      end_window.destroy()
+      self.end_frame.destroy() #destroys the end frame label
+      self.end_heading.destroy() #destroys the end heading label
+      self.exit_button.destroy() #destroys the exit button
+      self.list_label.destroy() #destroys the list label
+      end_window.destroy() #destroys the end window
   
   
   
