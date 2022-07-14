@@ -50,14 +50,15 @@ class Mainpage:#start page
     self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_storage)
     self.start_button.place(x=100, y=500)#start button
 
-  def name_storage(self):
-        name=self.entry_box.get()
-        names.append(name)
-        self.heading_label.destroy()
-        self.user_label.destroy()
-        self.entry_box.destroy()
-        self.start_button.destroy()
-        Quizpage(window)
+  def name_storage(self): #stores names
+      name = self.entry_box.get()
+      names.append(name)  # add name to names list declared at the beginning
+      print (names)
+      self.heading_label.destroy()
+      self.user_label.destroy()
+      self.entry_box.destroy()
+      self.start_button.destroy()
+      Quizpage(window)
 
 class Quizpage:#Quiz page
 
@@ -152,26 +153,27 @@ class end:
 
 
   def __init__(self):
-      background_color = 'lightgreen'
-      global window2
-      window2 = Tk()
-      window2.title('Exit Box')
-      window2.geometry('700x600')
-      self.end_frame = Frame(window2, width=700, height=600,bg=background_color)
-      self.end_frame.grid(row=1)
-      self.end_heading = Label(window2,text='Thank You For Trying Out The Quiz ', font=('Tw Cen Mt', 22, 'bold'), bg=background_color)
-      self.end_heading.place(x=80, y=50) 
-      self.exit_button = Button( 
-          window2, 
-          text='Exit',  
-          width=10,  
-          bg='lightblue', 
-          font=('Tw Cen Mt', 12, 'bold'),  
-          command=self.close_end,  
-          ) 
-      self.exit_button.place(x=260, y=200) 
-      self.list_label = Label(window2, text='Do not hesitate to try again..', font=('Tw Cen Mt', 12, 'bold'), width=40, bg=background_color)
-      self.list_label.place(x=110, y=100)
+        background_color = 'lightgreen' #Background color of the page
+        global end_window
+        end_window = Tk()
+        end_window.title('Exit Box') #Window title
+        end_window.geometry('600x600') #Window size
+
+        self.end_frame = Frame(end_window, width=700, height=600,bg=background_color)
+        self.end_frame.grid(row=1)
+
+        self.end_heading = Label(end_window,text='Thank You For Trying Out The Quiz  ',  font=('Tw Cen Mt', 22, 'bold'), bg=background_color) #Code for main heading of the page
+        self.end_heading.place(x=15, y=35) #Location of the heading
+
+        self.exit_button = Button(end_window,text='Exit',width=10,bg='red',font=('Tw Cen Mt', 12, 'bold'),command=self.close_end,) #Code for the exit button
+        self.exit_button.place(x=260, y=200) #Location of the heading
+
+        self.list_label = Label(end_window, text='Do not hesitate to try again' + str(names),font=('Tw Cen Mt', 12, 'bold'),width=40, bg=background_color) #Code for label to try again
+        self.list_label.place(x=110, y=80) #Location of the label
+        
+        self.final_score = Label(end_window, text='Your final score is ' + str(score), font=('Tw Cen Mt', 12, 'bold'), width=40, bg=background_color) #Code for quiz summary
+        self.final_score.place(x=110, y=150)#Location of the label
+        
   
   
   def close_end(self):
@@ -179,7 +181,7 @@ class end:
       self.end_heading.destroy()
       self.exit_button.destroy()
       self.list_label.destroy()
-      window2.destroy()
+      end_window.destroy()
   
   
   
