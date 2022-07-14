@@ -35,20 +35,20 @@ class Mainpage:
     background_color="lightgrey"
 
     self.heading_label=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg=background_color)
-    self.heading_label.place(x=100, y=20)
+    self.heading_label.place(x=100, y=20)#Heading of the quiz
 
     self.var1=IntVar()
 
     self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg=background_color)
-    self.user_label.place(x=650, y=270)
+    self.user_label.place(x=650, y=270)#name heading
 
     self.entry_box=Entry(window)
-    self.entry_box.place(x=800, y=320)
+    self.entry_box.place(x=800, y=320)#entry box
 
-    self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_collection)
-    self.start_button.place(x=100, y=500)
+    self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_storage)
+    self.start_button.place(x=100, y=500)#start button
 
-  def name_collection(self):
+  def name_storage(self):
         name=self.entry_box.get()
         names.append(name)
         self.heading_label.destroy()
@@ -60,7 +60,7 @@ class Mainpage:
 class Quiz:
 
   def __init__(self, parent):
-    background_color="lightgrey"
+    background_color="white"
  
  
     self.quiz_frame = Frame(parent, bg = background_color, padx=40, pady=40)
@@ -73,22 +73,23 @@ class Quiz:
 
     self.var1=IntVar()
 
-    self.rb1 = Radiobutton(window, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
-    self.rb1.grid(row=1, sticky=W)
+    self.options1 = Radiobutton(window, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
+    self.options1.grid(row=1, sticky=W)
 
-    self.rb2 = Radiobutton(window, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.var1, pady=10)
-    self.rb2.grid(row=2, sticky=W)
+    self.options2 = Radiobutton(window, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.var1, pady=10)
+    self.options2.grid(row=2, sticky=W)
 
-    self.rb3 = Radiobutton(window, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.var1, pady=10)
-    self.rb3.grid(row=3, sticky=W)
+    self.options3 = Radiobutton(window, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.var1, pady=10)
+    self.options3.grid(row=3, sticky=W)
 
-    self.rb4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.var1, pady=10)
-    self.rb4.grid(row=4, sticky=W)
+    self.options4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.var1, pady=10)
+    self.options4.grid(row=4, sticky=W)
 
     self.confirm_button = Button(window, text="Confrim",bg="white",command=self.test_progress)
     self.confirm_button.grid(row=6)
-    self.score_label  = Label(window, text =
-                             'score')
+    
+    
+    self.score_label  = Label(window, text ='score')
     self.score_label.grid(row= 7)  
      
      
@@ -96,15 +97,15 @@ class Quiz:
      randomQuestions()
      self.var1.set(0)
      self.question_label.config(text=questions_answers[qnum][0])
-     self.rb1.config(text=questions_answers[qnum][1])
-     self.rb2.config(text=questions_answers[qnum][2])
-     self.rb3.config(text=questions_answers[qnum][3])
-     self.rb4.config(text=questions_answers[qnum][4])
+     self.options1.config(text=questions_answers[qnum][1])
+     self.options2.config(text=questions_answers[qnum][2])
+     self.options3.config(text=questions_answers[qnum][3])
+     self.options4.config(text=questions_answers[qnum][4])
 
  
   def test_progress(self):
       global score
-      score = 0
+      #score = 0
       scr_label=self.score_label
       choice=self.var1.get()
       if len(asked)>9:
@@ -133,18 +134,19 @@ class Quiz:
                   scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5])
                   self.confirm_button.config(text="Confirmn")
                   self.questions_setup()
-       
 
 
-if __name__== "__main__":
-    window = Tk()
-    window.title("12CSC Quiz")
-    window.geometry("600x600")
-    bg_image = Image.open("img4.jpg")
-    bg_image = bg_image.resize((1000,600),Image.ANTIALIAS)
-    bg_image = ImageTk.PhotoImage(bg_image)
-    image_label= Label(window, image=bg_image)
-    image_label.place(x=0, y=0, relwidth=1, relheight=1)
-    start_object = Mainpage(window)
-
-    window.mainloop()
+  
+  
+  
+if __name__ == '__main__':
+  window = Tk()
+  window.title('12CSC Quiz')
+  window.geometry('700x600')
+  bg_image = Image.open('img4.jpg')
+  bg_image = bg_image.resize((1000, 600), Image.ANTIALIAS)
+  bg_image = ImageTk.PhotoImage(bg_image)
+  image_label = Label(window, image=bg_image)
+  image_label.place(x=0, y=0, relwidth=1, relheight=1)
+  start_object = Mainpage(window)
+  window.mainloop()
