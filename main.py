@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 from PIL import Image, ImageTk
+from tkinter import messagebox  # for message box
 
 names = []
 asked = []
@@ -52,13 +53,24 @@ class Mainpage:#start page
 
   def name_storage(self): #stores names
       name = self.entry_box.get()
-      names.append(name)  # add name to names list declared at the beginning
-      print (names)
-      self.heading_label.destroy()
-      self.user_label.destroy()
-      self.entry_box.destroy()
-      self.start_button.destroy()
-      Quizpage(window)
+        # component 6 error handling
+      if name == '':
+            messagebox.showerror('Name is required!!', 'Please enter your name!')
+      elif len(name) > 15: # to make sure name entered is between 1-15
+        messagebox.showerror('an error has occurred!', 'please enter a name between 1 and 15 characters')
+      elif name.isnumeric():
+            messagebox.showerror('an error has occurred!', 'Name can only consist of letters ONLY!!')
+      elif not name.isalpha(): # to make sure name entered is only letters not numbers
+        messagebox.showerror('an error has occurred!', 'No Symbols Please! Please Try Again!')
+      else:# to make sure name entered is only letters not symbols
+
+            names.append(name)  # add name to names list declared at the beginning
+            print (names)
+            self.heading_label.destroy()
+            self.user_label.destroy()
+            self.entry_box.destroy()
+            self.start_button.destroy()
+            Quizpage(window)
 
 class Quizpage:#Quiz page
 
@@ -90,13 +102,14 @@ class Quizpage:#Quiz page
 
     self.confirm_button = Button(window, text="Confrim",bg="white",command=self.test_progress)
     self.confirm_button.grid(row=6)#confirm button which takes you to the next page 
+    self.score_label = Label(window, text ='score')
+    self.score_label.grid(row= 7)  
     
     self.leave = Button(window, text='Leave', font=('Helvetica', '13', 'bold'), bg='red', command=self.end_screen) #leave button which takes you to the exit page 
 
     self.leave.place(x=0, y=250)  
     
-    self.score_label  = Label(window, text ='score')
-    self.score_label.grid(row= 7)  
+    
      
      
   def questions_setup(self):
@@ -119,6 +132,7 @@ class Quizpage:#Quiz page
           score +=1
           scr_label.configure(text=score)
           self.confirm_button.config(text="Confirm")
+          self.end_screen()
         else:
           score+=0
           scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] )
