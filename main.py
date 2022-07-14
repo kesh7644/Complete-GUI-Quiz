@@ -1,14 +1,14 @@
-from tkinter import *
-import random
-from PIL import Image, ImageTk
+from tkinter import * # for GUI
+import random #for randomisng
+from PIL import Image, ImageTk #forimages
 from tkinter import messagebox  # for message box
 
-names = []
-asked = []
-score = 0
+names = [] #list
+asked = []#list
+score = 0 #list
 
 questions_answers = { #Questions that will be asked
-    1: ["For how many days is a Test match scheduled?", '100 overs', '3 days','One day ', '5 days' ,'5 days',4],#Q1
+    1: ["For how many days is a Test match scheduled?", '100 overs', '3 days','One day ', '5 days' ,'5 days',4],#Q1 4 is index 6
     2: [" The Olympics are held every how many years?",'3 years','8 years','4 years', '1 year','4 years',3],#Q2
     3: ["In soccer, what body part can’t touch the ball?", 'Head','Hands','Legs','Chest','Hands',2],#Q3
     4: ["What’s the diameter of a basketball hoop in inches?",'14 Inches','16 Inches','18 Inches','20 Inches','18 Inches',3],#Q4
@@ -23,9 +23,9 @@ questions_answers = { #Questions that will be asked
 
 }
 def randomQuestions (): #randomises questions
-    global qnum
+    global qnum  #the question number is the key in our dictionary
     qnum = random.randint(1,10) # Number of questions
-    if qnum not in asked:
+    if qnum not in asked:# asked is a list we declared, so to start of with any number will be added
       asked.append(qnum)
     elif qnum in asked:
       randomQuestions()
@@ -41,11 +41,11 @@ class Mainpage:#start page
     self.var1=IntVar()
 
     self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg=background_color)
-    self.user_label.place(x=650, y=270)#name heading
+    self.user_label.place(x=300, y=270)#name heading
     
 
     self.entry_box=Entry(window)
-    self.entry_box.place(x=800, y=320)#entry box
+    self.entry_box.place(x=420, y=320)#entry box
     
 
     self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_storage)
@@ -66,10 +66,10 @@ class Mainpage:#start page
 
             names.append(name)  # add name to names list declared at the beginning
             print (names)
-            self.heading_label.destroy()
-            self.user_label.destroy()
-            self.entry_box.destroy()
-            self.start_button.destroy()
+            self.heading_label.destroy() #destroys the heading label
+            self.user_label.destroy() #destroys the uder label
+            self.entry_box.destroy() #destroys the entry box
+            self.start_button.destroy() #destroys the start button
             Quizpage(window)
 
 class Quizpage:#Quiz page
@@ -121,18 +121,17 @@ class Quizpage:#Quiz page
      self.options3.config(text=questions_answers[qnum][3])
      self.options4.config(text=questions_answers[qnum][4])
 
- 
+ #score mechanics 
   def test_progress(self):
-      global score
-      
+      global score # this score needs to b accessible to all
       scr_label=self.score_label
-      choice=self.var1.get()
-      if len(asked)>9:
-        if choice == questions_answers[qnum][6]:
-          score +=1
-          scr_label.configure(text=score)
-          self.confirm_button.config(text="Confirm")
-          self.end_screen()
+      choice=self.var1.get()# get the user choice, remember are con1 is the IntVar() method that stores the number chosen
+      if len(asked)>9: # to determine if its the last question and just end the quiz after
+        if choice == questions_answers[qnum][6]: # checking that the key  has the correct answer which is stored in index 6 of the value area
+          score +=1 # adds one point to score
+          scr_label.configure(text=score)  # will change label to new score when score is gained 
+          self.confirm_button.config(text="Confirm") # will change the text on the button to confirm
+          self.end_screen() # to open end screen (end box) when quiz is done
         else:
           score+=0
           scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] )
@@ -167,7 +166,7 @@ class end:
 
 
   def __init__(self):
-        background_color = 'lightgreen' #Background color of the page
+        background_color = 'black' #Background color of the page
         global end_window
         end_window = Tk()
         end_window.title('Exit Box') #Window title
@@ -176,16 +175,16 @@ class end:
         self.end_frame = Frame(end_window, width=700, height=600,bg=background_color)
         self.end_frame.grid(row=1)
 
-        self.end_heading = Label(end_window,text='Thank You For Trying Out The Quiz  ',  font=('Tw Cen Mt', 22, 'bold'), bg=background_color) #Code for main heading of the page
+        self.end_heading = Label(end_window,text='Thank You For Trying Out The Quiz  ',  font=('Tw Cen Mt', 22, 'bold'), bg='white') #Code for main heading of the page
         self.end_heading.place(x=15, y=35) #Location of the heading
 
         self.exit_button = Button(end_window,text='Exit',width=10,bg='red',font=('Tw Cen Mt', 12, 'bold'),command=self.close_end,) #Code for the exit button
         self.exit_button.place(x=260, y=200) #Location of the heading
 
-        self.list_label = Label(end_window, text='Do not hesitate to try again' + str(names),font=('Tw Cen Mt', 12, 'bold'),width=40, bg=background_color) #Code for label to try again
+        self.list_label = Label(end_window, text='Do not hesitate to try again' + str(names),font=('Tw Cen Mt', 12, 'bold'),width=40, bg='white') #Code for label to try again
         self.list_label.place(x=110, y=80) #Location of the label
         
-        self.final_score = Label(end_window, text='Your final score is ' + str(score), font=('Tw Cen Mt', 12, 'bold'), width=40, bg=background_color) #Code for quiz summary
+        self.final_score = Label(end_window, text='Your final score is ' + str(score), font=('Tw Cen Mt', 12, 'bold'), width=40, bg='white') #Code for quiz summary
         self.final_score.place(x=110, y=150)#Location of the label
         
   
