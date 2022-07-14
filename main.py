@@ -3,50 +3,50 @@ import random
 from PIL import Image, ImageTk
 
 names = []
-global questions_answers
 asked = []
+score = 0
 
 questions_answers = { #Questions that will be asked
-    1: ["For how many days is a Test match scheduled?", '100 overs', '3 days','One day ', '5 days' ,'5 days',4],
-    2: [" The Olympics are held every how many years?",'3 years','8 years','4 years', '1 year','4 years',3],
-    3: ["In soccer, what body part can’t touch the ball?", 'Head','Hands','Legs','Chest','Hands',2],
-    4: ["What’s the diameter of a basketball hoop in inches?",'14 Inches','16 Inches','18 Inches','20 Inches','18 Inches',3],
-    5: ["Which batsman started his international cricketing career at the age of 16?",'MS Dhoni','Virat Kohli','Joe Root','Sachin Tendulkar','Sachin Tendulkar',4],
-    6: ["How many players are there in a football (soccer) team?",'7','9','11','13','11',3],
-    7: ["Which sport is not played with a ball?",'Basketball','Football','Cricket','Ice Hockey','Ice Hockey',4],
-    8: ["Where will the 2023 Cricket World Cup be hosted?",'Australia','India','New Zealand','England','India',2],
-    9: ["Which famous boxer is frequently ranked as the best heavyweight boxer of all time?",'Muhammad Ali','Tyson Fury','Mike Tyson','Anthony Joshua','Muhammad Ali',1],
-    10: ["Which sport does Serena Williams play?",'Basketball','Tennis','Cricket','Football','Tennis',2],
+    1: ["For how many days is a Test match scheduled?", '100 overs', '3 days','One day ', '5 days' ,'5 days',4],#Q1
+    2: [" The Olympics are held every how many years?",'3 years','8 years','4 years', '1 year','4 years',3],#Q2
+    3: ["In soccer, what body part can’t touch the ball?", 'Head','Hands','Legs','Chest','Hands',2],#Q3
+    4: ["What’s the diameter of a basketball hoop in inches?",'14 Inches','16 Inches','18 Inches','20 Inches','18 Inches',3],#Q4
+    5: ["Which batsman started his international cricketing career at the age of 16?",'MS Dhoni','Virat Kohli','Joe Root','Sachin Tendulkar','Sachin Tendulkar',4],#Q5
+    6: ["How many players are there in a football (soccer) team?",'7','9','11','13','11',3],#Q6
+    7: ["Which sport is not played with a ball?",'Basketball','Football','Cricket','Ice Hockey','Ice Hockey',4],#Q7
+    8: ["Where will the 2023 Cricket World Cup be hosted?",'Australia','India','New Zealand','England','India',2],#Q8
+    9: ["Which famous boxer is frequently ranked as the best heavyweight boxer of all time?",'Muhammad Ali','Tyson Fury','Mike Tyson','Anthony Joshua','Muhammad Ali',1],#Q9
+    10: ["Which sport does Serena Williams play?",'Basketball','Tennis','Cricket','Football','Tennis',2],#Q10
 
 
 
 }
-def randomiser():
+def randomQuestions (): #randomises questions
     global qnum
-    qnum = random.randint(1,10)
+    qnum = random.randint(1,10) # Number of questions
     if qnum not in asked:
       asked.append(qnum)
     elif qnum in asked:
-      randomiser()
+      randomQuestions()
      
 
-class QuizStarter:
+class Mainpage:
   def __init__(self, parent):
     background_color="lightgrey"
 
-    self.heading_label=Label(window, text = "Car quiz", font =( "Times","25","bold"),bg=background_color)
-    self.heading_label.place(x=520, y=100)
+    self.heading_label=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg=background_color)
+    self.heading_label.place(x=100, y=20)
 
     self.var1=IntVar()
 
-    self.user_label=Label(window, text="Please Enter your Username Below: ", font=( "Times","18","bold"),bg=background_color)
-    self.user_label.place(x=450, y=300)
+    self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg=background_color)
+    self.user_label.place(x=650, y=270)
 
     self.entry_box=Entry(window)
-    self.entry_box.place(x=600, y=400)
+    self.entry_box.place(x=800, y=320)
 
-    self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="whitesmoke",command=self.name_collection)
-    self.start_button.place(x=642, y=450)
+    self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_collection)
+    self.start_button.place(x=100, y=500)
 
   def name_collection(self):
         name=self.entry_box.get()
@@ -59,14 +59,14 @@ class QuizStarter:
 
 class Quiz:
 
-   def __init__(self, parent):
+  def __init__(self, parent):
     background_color="lightgrey"
  
  
     self.quiz_frame = Frame(parent, bg = background_color, padx=40, pady=40)
     self.quiz_frame.grid()
 
-    randomiser()
+    randomQuestions()
 
     self.question_label=Label(window, text = questions_answers[qnum][0], font =( "Tw Cen MT","18","bold"))
     self.question_label.grid(row= 0, padx=10, pady=10)  
@@ -92,8 +92,8 @@ class Quiz:
     self.score_label.grid(row= 7)  
      
      
-   def questions_setup(self):
-     randomiser()
+  def questions_setup(self):
+     randomQuestions()
      self.var1.set(0)
      self.question_label.config(text=questions_answers[qnum][0])
      self.rb1.config(text=questions_answers[qnum][1])
@@ -102,7 +102,7 @@ class Quiz:
      self.rb4.config(text=questions_answers[qnum][4])
 
  
-   def test_progress(self):
+  def test_progress(self):
       global score
       score = 0
       scr_label=self.score_label
@@ -127,7 +127,7 @@ class Quiz:
                 scr_label.configure(text=score)
                 self.confirm_button.config(text="confirm")
                 self.questions_setup()
- 
+      
               else:
                   score+=0
                   scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5])
@@ -145,6 +145,6 @@ if __name__== "__main__":
     bg_image = ImageTk.PhotoImage(bg_image)
     image_label= Label(window, image=bg_image)
     image_label.place(x=0, y=0, relwidth=1, relheight=1)
-    start_object = QuizStarter(window)
+    start_object = Mainpage(window)
 
     window.mainloop()
