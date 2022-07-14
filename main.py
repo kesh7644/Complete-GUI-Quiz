@@ -89,25 +89,25 @@ class Quizpage:#Quiz page
     self.var1=IntVar()
 
     self.options1 = Radiobutton(window, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
-    self.options1.grid(row=1, sticky=W)#option 1
+    self.options1.place(x=0, y=60) #option 1
 
     self.options2 = Radiobutton(window, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.var1, pady=10)
-    self.options2.grid(row=2, sticky=W)#option 2
+    self.options2.place(x=0, y=120) #option 2
 
     self.options3 = Radiobutton(window, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.var1, pady=10)
-    self.options3.grid(row=3, sticky=W)#option 3
+    self.options3.place(x=0, y=180) #option 3
 
     self.options4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.var1, pady=10)
-    self.options4.grid(row=4, sticky=W)#option 4
+    self.options4.place(x=0, y=240) #option 4
 
     self.confirm_button = Button(window, text="Confrim",bg="white",command=self.test_progress)
-    self.confirm_button.grid(row=6)#confirm button which takes you to the next page 
+    self.confirm_button.place(x=380, y=270)#confirm button which takes you to the next page 
     self.score_label = Label(window, text ='score')
-    self.score_label.grid(row= 7)  
+    self.score_label.place(x=407, y=300)  
     
     self.leave = Button(window, text='Leave', font=('Helvetica', '13', 'bold'), bg='red', command=self.end_screen) #leave button which takes you to the exit page 
 
-    self.leave.place(x=0, y=250)  
+    self.leave.place(x=0, y=300)  
     
     
      
