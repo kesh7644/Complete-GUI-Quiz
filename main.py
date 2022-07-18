@@ -153,7 +153,7 @@ class Quizpage:#Quiz page
               else: # if choice was not the correct answer
                   score+=0 # score will stay the same
                   scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5]) # error message
-                  self.confirm_button.config(text="Confirmn")
+                  self.confirm_button.config(text="Confirm")
                   self.questions_setup() # move to the next question:
 
 
