@@ -199,15 +199,15 @@ class end:
       end_window.destroy() #destroys the end window
   
   
-  
+#program runs below
 if __name__ == '__main__':
   window = Tk()
   window.title('12CSC Quiz')
   window.geometry('700x600')
-  bg_image = Image.open('img4.jpg')
+  bg_image = Image.open('img4.jpg')#code for image
   bg_image = bg_image.resize((1000, 600), Image.ANTIALIAS)
   bg_image = ImageTk.PhotoImage(bg_image)
-  image_label = Label(window, image=bg_image)
+  image_label = Label(window, image=bg_image)#image label
   image_label.place(x=0, y=0, relwidth=1, relheight=1)
   start_object = Mainpage(window)
-  window.mainloop()
+  window.mainloop() # so the window doesnt dissapear
