@@ -1,5 +1,6 @@
 from tkinter import * # for GUI
 import random #for randomisng
+import time
 from PIL import Image, ImageTk #forimages
 from tkinter import messagebox  # for message box
 
@@ -123,7 +124,7 @@ class Quizpage:#Quiz page
 
  #score mechanics 
   def test_progress(self):
-      global score # this score needs to b accessible to all
+      global score # this score needs to be accessible to all
       scr_label=self.score_label
       choice=self.var1.get()# get the user choice, remember are con1 is the IntVar() method that stores the number chosen
       if len(asked)>9: # to determine if its the last question and just end the quiz after
@@ -134,9 +135,10 @@ class Quizpage:#Quiz page
           self.result_screen() # to open end screen (end box) when quiz is done
         else:
           score+=0 # score will stay the same
-          scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] ) # this is to give the right answer instead of their score
+          time.sleep(2)
+          scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5]) # this is to give the right answer instead of their score
           self.confirm_button.config(text="confirm") # button
-     
+          self.result_screen()
       else:
             if choice==0:  # if user does not select an option
               self.confirm_button.config(text="Try Again, you didn't select an option then submit again" ) # error message
