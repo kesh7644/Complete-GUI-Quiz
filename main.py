@@ -61,7 +61,7 @@ class Mainpage:#start page
         messagebox.showerror('an error has occurred!', 'please enter a name between 1 and 15 characters')
       elif name.isnumeric():
             messagebox.showerror('an error has occurred!', 'Name can only consist of letters ONLY!!')
-      elif not name.isalpha(): # to make sure name entered is only letters not numbers
+      elif not name.replace(' ','').isalpha(): # to make sure name entered is only letters not numbers
         messagebox.showerror('an error has occurred!', 'No Symbols Please! Please Try Again!')
       else:# to make sure name entered is only letters not symbols
 
