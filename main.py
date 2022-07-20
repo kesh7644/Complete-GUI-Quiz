@@ -126,7 +126,7 @@ class Quizpage:#Quiz page
   def test_progress(self):
       global score # this score needs to be accessible to all
       scr_label=self.score_label
-      choice=self.var1.get()# get the user choice, remember are con1 is the IntVar() method that stores the number chosen
+      choice=self.var1.get()# get the user choice, remember are var1 is the IntVar() method that stores the number chosen
       if len(asked)>9: # to determine if its the last question and just end the quiz after
         if choice == questions_answers[qnum][6]: # checking that the key  has the correct answer which is stored in index 6 of the value area
           score +=1 # adds one point to score
@@ -158,13 +158,13 @@ class Quizpage:#Quiz page
 
 
   def result_screen(self): # method to end screen
-    window.destroy()
+    window.destroy() #destroys window 
     name = names[0]
-    open_end_object = end()
+    open_end_object = end() #opens end page
 
 
 
-class end:
+class end: #end class 
 
 
   def __init__(self):
@@ -175,7 +175,7 @@ class end:
         end_window.geometry('600x600') #Window size
 
         self.end_frame = Frame(end_window, width=700, height=600,bg=background_color)
-        self.end_frame.grid(row=1)
+        self.end_frame.grid(row=1) #code for end frame
 
         self.end_heading = Label(end_window,text='Thank You For Trying Out The Quiz  ',  font=('Tw Cen Mt', 22, 'bold'), bg='white') #Code for main heading of the page
         self.end_heading.place(x=15, y=35) #Location of the heading
