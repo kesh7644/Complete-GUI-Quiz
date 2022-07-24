@@ -32,7 +32,7 @@ def randomQuestions (): #randomises questions
       randomQuestions()
      
 
-class Mainpage:#start page
+class MainPage:#start page
   def __init__(self, parent):
     background_color="lightgrey"#background color
 
@@ -71,9 +71,9 @@ class Mainpage:#start page
             self.user_label.destroy() #destroys the uder label
             self.entry_box.destroy() #destroys the entry box
             self.start_button.destroy() #destroys the start button
-            Quizpage(window) # now we open the quiz questions page
+            QuizPage(window) # now we open the quiz questions page
 
-class Quizpage:#Quiz page
+class QuizPage:#Quiz page
 
   def __init__(self, parent):
     background_color="white"#background color
@@ -101,7 +101,7 @@ class Quizpage:#Quiz page
     self.options4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.var1, pady=10)
     self.options4.place(x=0, y=240) #option 4
 
-    self.confirm_button = Button(window, text="Confrim",bg="white",command=self.test_progress)
+    self.confirm_button = Button(window, text="Confrim",bg="white",command=self.score_counter)
     self.confirm_button.place(x=380, y=270)#confirm button which takes you to the next page 
     self.score_label = Label(window, text ='score')
     self.score_label.place(x=407, y=300)  
@@ -123,7 +123,7 @@ class Quizpage:#Quiz page
      self.options4.config(text=questions_answers[qnum][4])
 
  #score mechanics 
-  def test_progress(self):
+  def score_counter(self):
       global score # this score needs to be accessible to all
       scr_label=self.score_label
       choice=self.var1.get()# get the user choice, remember are var1 is the IntVar() method that stores the number chosen
@@ -160,11 +160,11 @@ class Quizpage:#Quiz page
   def result_screen(self): # method to end screen
     window.destroy() #destroys window 
     name = names[0]
-    open_end_object = end() #opens end page
+    open_end_object = End() #opens end page
 
 
 
-class end: #end class 
+class End: #end class 
 
 
   def __init__(self):
@@ -209,5 +209,5 @@ if __name__ == '__main__':
   bg_image = ImageTk.PhotoImage(bg_image)
   image_label = Label(window, image=bg_image)#image label
   image_label.place(x=0, y=0, relwidth=1, relheight=1)
-  start_object = Mainpage(window)
+  start_object = MainPage(window)
   window.mainloop() # so the window doesnt dissapear
