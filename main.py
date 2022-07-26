@@ -17,7 +17,7 @@ questions_answers = { #Questions that will be asked
     6: ["How many players are there in a football (soccer) team?",'7','9','11','13','11',3],#Q6
     7: ["Which sport is not played with a ball?",'Basketball','Football','Cricket','Ice Hockey','Ice Hockey',4],#Q7
     8: ["Where will the 2023 Cricket World Cup be hosted?",'Australia','India','New Zealand','England','India',2],#Q8
-    9: ["Which famous boxer is frequently ranked as the best heavyweight boxer of all time?",'Muhammad Ali','Tyson Fury','Mike Tyson','Anthony Joshua','Muhammad Ali',1],#Q9
+    9: ["Which famous boxer is frequently ranked as the \n best heavyweight boxer of all time?",'Muhammad Ali','Tyson Fury','Mike Tyson','Anthony Joshua','Muhammad Ali',1],#Q9
     10: ["Which sport does Serena Williams play?",'Basketball','Tennis','Cricket','Football','Tennis',2],#Q10
 
 
@@ -36,12 +36,12 @@ class MainPage:#start page
   def __init__(self, parent):
     background_color="lightgrey"#background color
 
-    self.heading_label=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg=background_color)
+    self.heading_label=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg="black",fg="white")
     self.heading_label.place(x=100, y=20)#Heading of the quiz
 
     self.var1=IntVar()
 
-    self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg=background_color)
+    self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg="black",fg="white")
     self.user_label.place(x=300, y=270)#name heading
     
 
