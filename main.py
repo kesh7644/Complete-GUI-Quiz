@@ -4,53 +4,27 @@ import time
 from PIL import Image, ImageTk #forimages
 from tkinter import messagebox  # for message box
 
-names = [] #list
-asked = []#list
-score = 0 #list
 
-questions_answers = { #Questions that will be asked
-    1: ["For how many days is a Test match scheduled?", '100 overs', '3 days','One day ', '5 days' ,'5 days',4],#Q1 4 is index 6
-    2: [" The Olympics are held every how many years?",'3 years','8 years','4 years', '1 year','4 years',3],#Q2
-    3: ["In soccer, what body part can’t touch the ball?", 'Head','Hands','Legs','Chest','Hands',2],#Q3
-    4: ["What’s the diameter of a basketball hoop in inches?",'14 Inches','16 Inches','18 Inches','20 Inches','18 Inches',3],#Q4
-    5: ["Which batsman started his international cricketing career at the age of 16?",'MS Dhoni','Virat Kohli','Joe Root','Sachin Tendulkar','Sachin Tendulkar',4],#Q5
-    6: ["How many players are there in a football (soccer) team?",'7','9','11','13','11',3],#Q6
-    7: ["Which sport is not played with a ball?",'Basketball','Football','Cricket','Ice Hockey','Ice Hockey',4],#Q7
-    8: ["Where will the 2023 Cricket World Cup be hosted?",'Australia','India','New Zealand','England','India',2],#Q8
-    9: ["Which famous boxer is frequently ranked as the \n best heavyweight boxer of all time?",'Muhammad Ali','Tyson Fury','Mike Tyson','Anthony Joshua','Muhammad Ali',1],#Q9
-    10: ["Which sport does Serena Williams play?",'Basketball','Tennis','Cricket','Football','Tennis',2],#Q10
-
-
-
-}
-def randomQuestions (): #randomises questions
-    global qnum  #the question number is the key in our dictionary
-    qnum = random.randint(1,10) # Number of questions
-    if qnum not in asked:# asked is a list we declared, so to start of with any number will be added
-      asked.append(qnum)
-    elif qnum in asked:
-      randomQuestions()
-     
 
 class MainPage:#start page
   def __init__(self, parent):
     background_color="lightgrey"#background color
 
-    self.heading_label=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg="black",fg="white")
-    self.heading_label.place(x=100, y=20)#Heading of the quiz
+    self.heading_tag=Label(window, text = "General Knowledge Sports quiz", font =( "Times","19","bold"),bg="black",fg="white")
+    self.heading_tag.place(x=100, y=20)#Heading of the quiz
 
-    self.var1=IntVar()
+    self.rb_selector=IntVar()
 
-    self.user_label=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg="black",fg="white")
-    self.user_label.place(x=300, y=270)#name heading
+    self.user_tag=Label(window, text="Please Enter your name Below: ", font=( "Times","18","bold"),bg="black",fg="white")
+    self.user_tag.place(x=300, y=270)#name heading
     
 
     self.entry_box=Entry(window)
     self.entry_box.place(x=420, y=320)#entry box
     
 
-    self.start_button = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_storage)
-    self.start_button.place(x=100, y=500)#start button
+    self.start_key = Button(window, text="START", font=( "Helvetica","13","bold"), bg="Light green",command=self.name_storage)
+    self.start_key.place(x=100, y=500)#start button
 
   def name_storage(self): #stores names
       name = self.entry_box.get()
@@ -67,10 +41,10 @@ class MainPage:#start page
 
             names.append(name)  # add name to names list declared at the beginning
             print (names)
-            self.heading_label.destroy() #destroys the heading label
-            self.user_label.destroy() #destroys the uder label
+            self.heading_tag.destroy() #destroys the heading label
+            self.user_tag.destroy() #destroys the uder label
             self.entry_box.destroy() #destroys the entry box
-            self.start_button.destroy() #destroys the start button
+            self.start_key.destroy() #destroys the start button
             QuizPage(window) # now we open the quiz questions page
 
 class QuizPage:#Quiz page
@@ -87,24 +61,24 @@ class QuizPage:#Quiz page
     self.question_label=Label(window, text = questions_answers[qnum][0], font =( "Tw Cen MT","18","bold")) #questions
     self.question_label.grid(row= 0, padx=10, pady=10)  
 
-    self.var1=IntVar()
+    self.rb_selector=IntVar()
 
-    self.options1 = Radiobutton(window, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
+    self.options1 = Radiobutton(window, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.rb_selector, pady=10)
     self.options1.place(x=0, y=60) #option 1
 
-    self.options2 = Radiobutton(window, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.var1, pady=10)
+    self.options2 = Radiobutton(window, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=2, variable=self.rb_selector, pady=10)
     self.options2.place(x=0, y=120) #option 2
 
-    self.options3 = Radiobutton(window, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.var1, pady=10)
+    self.options3 = Radiobutton(window, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=3, variable=self.rb_selector, pady=10)
     self.options3.place(x=0, y=180) #option 3
 
-    self.options4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.var1, pady=10)
+    self.options4 = Radiobutton(window, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=4, variable=self.rb_selector, pady=10)
     self.options4.place(x=0, y=240) #option 4
 
     self.confirm_button = Button(window, text="Confrim",bg="white",command=self.score_counter)
     self.confirm_button.place(x=380, y=270)#confirm button which takes you to the next page 
-    self.score_label = Label(window, text ='score')
-    self.score_label.place(x=407, y=300)  
+    self.score_tag = Label(window, text ='score')
+    self.score_tag.place(x=407, y=300)  
     
     self.leave = Button(window, text='Leave', font=('Helvetica', '13', 'bold'), bg='red', command=self.result_screen) #leave button which takes you to the exit page 
 
@@ -115,7 +89,7 @@ class QuizPage:#Quiz page
      
   def questions_setup(self):
      randomQuestions()
-     self.var1.set(0)
+     self.rb_selector.set(0)
      self.question_label.config(text=questions_answers[qnum][0])
      self.options1.config(text=questions_answers[qnum][1])
      self.options2.config(text=questions_answers[qnum][2])
@@ -125,8 +99,8 @@ class QuizPage:#Quiz page
  #score mechanics 
   def score_counter(self):
       global score # this score needs to be accessible to all
-      scr_label=self.score_label
-      choice=self.var1.get()# get the user choice, remember are var1 is the IntVar() method that stores the number chosen
+      scr_label=self.score_tag
+      choice=self.rb_selector.get()# get the user choice, remember are rb_selector is the IntVar() method that stores the number chosen
       if len(asked)>9: # to determine if its the last question and just end the quiz after
         if choice == questions_answers[qnum][6]: # checking that the key  has the correct answer which is stored in index 6 of the value area
           score +=1 # adds one point to score
@@ -142,7 +116,7 @@ class QuizPage:#Quiz page
       else:
             if choice==0:  # if user does not select an option
               self.confirm_button.config(text="Try Again, you didn't select an option then submit again" ) # error message
-              choice=self.var1.get() # still get the answer if they choose it
+              choice=self.rb_selector.get() # still get the answer if they choose it
             else:
               if choice == questions_answers[qnum][6]:  # if the choice made is correct
                 score+=1  # add +1 to score
@@ -201,6 +175,50 @@ class End: #end class
   
 #program runs below
 if __name__ == '__main__':
+  names = [] #list
+  asked = []#list
+  score = 0 #list
+
+  questions_answers = { #Questions that will be asked
+    1: ["For how many days is a Test match scheduled?", '100 overs', '3 days','One day ', '5 days' ,'5 days',4],#Q1 4 is index 6
+
+    
+    2: [" The Olympics are held every how many years?",'3 years','8 years','4 years', '1 year','4 years',3],#Q2
+
+    
+    3: ["In soccer, what body part can’t touch the ball?", 'Head','Hands','Legs','Chest','Hands',2],#Q3
+
+    
+    4: ["What’s the diameter of a basketball hoop in inches?",'14 Inches','16 Inches','18 Inches','20 Inches','18 Inches',3],#Q4
+
+    
+    5: ["Which batsman started his international cricketing career at the age of 16?",'MS Dhoni','Virat Kohli','Joe Root','Sachin Tendulkar','Sachin Tendulkar',4],#Q5
+
+    
+    6: ["How many players are there in a football (soccer) team?",'7','9','11','13','11',3],#Q6
+
+    
+    7: ["Which sport is not played with a ball?",'Basketball','Football','Cricket','Ice Hockey','Ice Hockey',4],#Q7
+
+    
+    8: ["Where will the 2023 Cricket World Cup be hosted?",'Australia','India','New Zealand','England','India',2],#Q8
+
+    
+    9: ["Which famous boxer is frequently ranked as the \n best heavyweight boxer of all time?",'Muhammad Ali','Tyson Fury','Mike Tyson','Anthony Joshua','Muhammad Ali',1],#Q9
+
+    
+    10: ["Which sport does Serena Williams play?",'Basketball','Tennis','Cricket','Football','Tennis',2],#Q10
+
+    
+}
+  def randomQuestions (): #randomises questions
+    global qnum  #the question number is the key in our dictionary
+    qnum = random.randint(1,10) # Number of questions
+    if qnum not in asked:# asked is a list we declared, so to start of with any number will be added
+      asked.append(qnum)
+    elif qnum in asked:
+      randomQuestions()
+     
   window = Tk()
   window.title('12CSC Quiz')
   window.geometry('700x600')
