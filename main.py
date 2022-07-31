@@ -1,6 +1,6 @@
 from tkinter import * # for GUI
 import random #for randomisng
-import time
+import time#imports time 
 from PIL import Image, ImageTk #forimages
 from tkinter import messagebox  # for message box
 
@@ -33,14 +33,14 @@ class MainPage:#start page
             messagebox.showerror('Name is required!!', 'Please enter your name!')
       elif len(name) > 15: # to make sure name entered is between 1-15
         messagebox.showerror('an error has occurred!', 'please enter a name between 1 and 15 characters')
-      elif name.isnumeric():
-            messagebox.showerror('an error has occurred!', 'Name can only consist of letters ONLY!!')
-      elif not name.replace(' ','').isalpha(): # to make sure name entered is only letters not numbers
+      elif name.isnumeric(): # to make sure name entered is only letters not numbers
+            messagebox.showerror('an error has occurred!', 'Name can only consist of letters ONLY!!')#error message
+      elif not name.replace(' ','').isalpha(): # to make sure name accepts spaces
         messagebox.showerror('an error has occurred!', 'No Symbols Please! Please Try Again!')
       else:# to make sure name entered is only letters not symbols
 
             names.append(name)  # add name to names list declared at the beginning
-            print (names)
+            print (names)# prints name
             self.heading_tag.destroy() #destroys the heading label
             self.user_tag.destroy() #destroys the uder label
             self.entry_box.destroy() #destroys the entry box
@@ -88,13 +88,13 @@ class QuizPage:#Quiz page
      
      
   def questions_setup(self):
-     randomQuestions()
-     self.rb_selector.set(0)
-     self.question_label.config(text=questions_answers[qnum][0])
-     self.options1.config(text=questions_answers[qnum][1])
-     self.options2.config(text=questions_answers[qnum][2])
-     self.options3.config(text=questions_answers[qnum][3])
-     self.options4.config(text=questions_answers[qnum][4])
+     randomQuestions()#question randomiser
+     self.rb_selector.set(0)#Sets value to 0.
+     self.question_label.config(text=questions_answers[qnum][0])#Configure question label to be the question in a key from dictionary.
+     self.options1.config(text=questions_answers[qnum][1])#Radio button options become the answers option 1
+     self.options2.config(text=questions_answers[qnum][2])#Radio button options become the answers option 2
+     self.options3.config(text=questions_answers[qnum][3])#Radio button options become the answers option 3
+     self.options4.config(text=questions_answers[qnum][4])#Radio button options become the answers option 4
 
  #score mechanics 
   def score_counter(self):
@@ -102,7 +102,7 @@ class QuizPage:#Quiz page
       scr_label=self.score_tag
       choice=self.rb_selector.get()# get the user choice, remember are rb_selector is the IntVar() method that stores the number chosen
       if len(asked)>9: # to determine if its the last question and just end the quiz after
-        if choice == questions_answers[qnum][6]: # checking that the key  has the correct answer which is stored in index 6 of the value area
+        if choice == questions_answers[qnum][6]:# checking that the key  has the correct answer which is stored in index 6 of the value area
           score +=1 # adds one point to score
           scr_label.configure(text=score)  # will change label to new score when score is gained 
           self.confirm_button.config(text="Confirm") # will change the text on the button to confirm
@@ -131,7 +131,7 @@ class QuizPage:#Quiz page
                   self.questions_setup() # move to the next question:
 
 
-  def result_screen(self): # method to end screen
+  def result_screen(self): # method to result screen
     window.destroy() #destroys window 
     name = names[0]
     open_end_object = End() #opens end page
@@ -165,7 +165,7 @@ class End: #end class
         
   
   
-  def close_end(self):
+  def close_end(self):#closes end page
       self.end_frame.destroy() #destroys the end frame label
       self.end_heading.destroy() #destroys the end heading label
       self.exit_button.destroy() #destroys the exit button
